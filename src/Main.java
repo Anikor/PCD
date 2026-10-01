@@ -11,6 +11,3 @@ void main() {
         IO.println("i = " + i);
     }
 }
-public class massiv{
-
-}

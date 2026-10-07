@@ -10,9 +10,13 @@
 
 <VBox prefHeight="620.0" prefWidth="900.0" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pcd.Controller">
    <children>
-      <Label text="Tabloul mas[]" />
+      <HBox alignment="CENTER_LEFT" spacing="8.0">
+         <children>
+            <Label text="Tabloul mas[]" />
+            <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStart" text="Start" />
+         </children>
+      </HBox>
       <TextArea fx:id="arrayArea" prefRowCount="3" wrapText="true" />
-      <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStart" text="Start" />
       <HBox spacing="8.0" VBox.vgrow="ALWAYS">
          <children>
             <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Karina – extends Thread" HBox.hgrow="ALWAYS">

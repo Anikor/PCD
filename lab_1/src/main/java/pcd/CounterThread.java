@@ -6,6 +6,7 @@ public class CounterThread extends Thread {
     private final Controller window;
 
     public CounterThread(String name, int from, int to, int step, int[] mas, Controller window) {
+        super(name);
         this.from = from;
         this.to = to;
         this.step = step;

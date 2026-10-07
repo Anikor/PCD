@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="620.0" prefWidth="900.0" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pcd.Controller">
+   <children>
+      <Label text="Tabloul mas[]" />
+      <TextArea fx:id="arrayArea" prefRowCount="3" wrapText="true" />
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStart" text="Start" />
+      <HBox spacing="8.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Karina – extends Thread" HBox.hgrow="ALWAYS">
+               <content>
+                  <TextArea fx:id="out1" editable="false" />
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Nica – Runnable" HBox.hgrow="ALWAYS">
+               <content>
+                  <TextArea fx:id="out2" editable="false" />
+               </content>
+            </TitledPane>
+            <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Denis – Runnable cu fir in main" HBox.hgrow="ALWAYS">
+               <content>
+                  <TextArea fx:id="out3" editable="false" />
+               </content>
+            </TitledPane>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

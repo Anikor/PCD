@@ -5,7 +5,6 @@ out/
 .kotlin
 .idea/
 *.iml
-out/
 .DS_Store
 
 ### Eclipse ###
@@ -31,5 +30,3 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
-

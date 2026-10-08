@@ -1,7 +1,11 @@
-
+import java.util.Random;
 public class Main {
     public static void main(String[] args){
-        int[] array = {1,2,3,4,5,6,7,8,9,10 };
+        int[] array = new int[100];
+        Random randomnumber = new Random();
+        for(int i = 0; i < array.length; i++){
+            array[i] = randomnumber.nextInt(100);
+        }
 
     }
 
@@ -11,6 +15,10 @@ class Helper{
     public boolean isodd(int n){
      return n % 2 != 0;
     }
+}
+
+class FromStart extends Thread{
+
 }
 
 /*

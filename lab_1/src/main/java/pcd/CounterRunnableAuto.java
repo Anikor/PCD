@@ -25,7 +25,7 @@ public class CounterRunnableAuto implements Runnable {
                 if (first == -1) {
                     first = i;
                 } else {
-                    window.show(2, thread.getName() + ": " + first + " + " + i + " = " + (first + i)
+                    window.show(thread.getName() + ": " + first + " + " + i + " = " + (first + i)
                             + "  (" + mas[first] + ", " + mas[i] + ")");
                     first = -1;
                 }

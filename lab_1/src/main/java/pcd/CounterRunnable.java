@@ -23,7 +23,7 @@ public class CounterRunnable implements Runnable {
                 if (first == -1) {
                     first = i;
                 } else {
-                    window.show(3, name + ": " + first + " + " + i + " = " + (first + i)
+                    window.show(name + ": " + first + " + " + i + " = " + (first + i)
                             + "  (" + mas[first] + ", " + mas[i] + ")");
                     first = -1;
                 }

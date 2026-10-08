@@ -23,7 +23,7 @@ public class CounterThread extends Thread {
                 if (first == -1) {
                     first = i;
                 } else {
-                    window.show(1, getName() + ": " + first + " + " + i + " = " + (first + i)
+                    window.show(getName() + ": " + first + " + " + i + " = " + (first + i)
                             + "  (" + mas[first] + ", " + mas[i] + ")");
                     first = -1;
                 }

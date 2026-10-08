@@ -25,18 +25,18 @@ public class Main {
             int last = mas.length - 1;
 
             Thread[] threads = {
-                    new CounterThread("Th1", 0, last, 1, mas, window),
-                    new CounterThread("Th2", last, 0, -1, mas, window),
-                    new Thread(new CounterRunnable(0, last, 1, mas, window), "Th1"),
-                    new Thread(new CounterRunnable(last, 0, -1, mas, window), "Th2")
+                    new CounterThread("Th1 Karina", 0, last, 1, mas, window),
+                    new CounterThread("Th2 Karina", last, 0, -1, mas, window),
+                    new Thread(new CounterRunnable(0, last, 1, mas, window), "Th1 Denis"),
+                    new Thread(new CounterRunnable(last, 0, -1, mas, window), "Th2 Denis")
             };
             for (Thread thread : threads) {
                 thread.start();
             }
 
             CounterRunnableAuto[] started = {
-                    new CounterRunnableAuto("Th1", 0, last, 1, mas, window),
-                    new CounterRunnableAuto("Th2", last, 0, -1, mas, window)
+                    new CounterRunnableAuto("Th1 Nica", 0, last, 1, mas, window),
+                    new CounterRunnableAuto("Th2 Nica", last, 0, -1, mas, window)
             };
 
             for (Thread thread : threads) {

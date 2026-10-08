@@ -51,4 +51,8 @@ public class Controller {
     public void show(String line) {
         Platform.runLater(() -> out.appendText(line + "\n"));
     }
+
+    public void addLetter(char letter) {
+        Platform.runLater(() -> out.appendText(String.valueOf(letter)));
+    }
 }

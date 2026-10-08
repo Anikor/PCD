@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main {
+    private static final String INFO = "Lucrarea de laborator nr. 1 (varianta 4) a fost efectuată de studenții grupei R-241: "
+            + "Drangoi Karina, Ghenova Nica, Chisacov Denis";
+
     public static void main(String[] args) throws Exception {
         Platform.startup(() -> { });
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("lab1_interf.fxml"));
@@ -46,6 +49,11 @@ public class Main {
                 counter.join();
             }
 
+            window.show("");
+            for (char letter : INFO.toCharArray()) {
+                window.addLetter(letter);
+                Thread.sleep(100);
+            }
             window.enableStart();
         }
     }

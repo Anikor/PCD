@@ -5,6 +5,10 @@ public class Main {
         Random randomnumber = new Random();
         for(int i = 0; i < mas.length; i++){
             mas[i] = randomnumber.nextInt(100) + 1;
+        Andrei th3 = new Andrei();
+        Andrei th4 = new Andrei();
+        th3.start();
+        th4.start();
         }
 
     }
@@ -38,10 +42,26 @@ class Student1 extends Thread{
 
 
 
+
     private int[] Alexarray;
     public void SumOddpairsFromStart(int[] mas){
         for (int i = 0; i < mas.length; i++) {
         }
     }
+}
+
+class Andrei extends Thread {
+        int[] mas;
+        @Override
+        public void run() {
+            int sum = 0;
+            for (int i = mas.length - 1; i >= 0; i--) {
+                if (mas[i] % 2 != 0) {
+                    sum += mas[i];
+                }
+            }
+            System.out.println("Th: сумма = " + sum);
+        }
+
 }
 

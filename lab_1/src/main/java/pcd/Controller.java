@@ -38,7 +38,6 @@ public class Controller {
         } catch (NumberFormatException e) {
             new Alert(Alert.AlertType.ERROR, "Tabloul trebuie să conțină doar numere întregi, separate prin spațiu si doar prin spatiu.").show();
 
-            //comment
         }
     }
 

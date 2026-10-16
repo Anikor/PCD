@@ -20,15 +20,22 @@ public class Main {
             stage.show();
         });
 
-        while (true) {
+        boolean mediumPressed = false;
+        boolean advancedPressed = false;
+        while (!(mediumPressed && advancedPressed)) {
             boolean advanced = window.waitForStart();
+            if (advanced) {advancedPressed = true;} else {mediumPressed = true;}
+
             window.show(advanced ? "Nivelul avansat: fiecare fir se prezintă singur din run()" : "Nivelul mediu: firele sunt enumerate de firul principal");
             Structure structure = new Structure(advanced, window);
             structure.start();
             new Lister(window).list(structure.getMain(), "");
             structure.join();
             window.show("Toate firele s-au terminat.");
-            window.enableButtons();
+            if (!(mediumPressed && advancedPressed)) {
+                window.enableButtons();
+            }
         }
+        window.show("Ambele butoane au fost apăsate. Programul s-a terminat.");
     }
 }

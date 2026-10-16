@@ -10,7 +10,7 @@ public class Lister {
     public void list(ThreadGroup group, String indent) {
         window.show(indent + "Grup " + group.getName() + " (prioritate maximă " + group.getMaxPriority() + ")");
         Thread[] threads = new Thread[group.activeCount()];
-        int count = group.enumerate(threads);
+        int count = group.enumerate(threads, false);
         for (int i = 0; i < count; i++) {
             window.show(indent + "  Fir " + threads[i].getName() + ", grup " + threads[i].getThreadGroup().getName()
                     + ", prioritate " + threads[i].getPriority());

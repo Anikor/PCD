@@ -10,7 +10,7 @@
 <VBox prefHeight="600.0" prefWidth="800.0" spacing="8.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pcd.Controller">
    <children>
       <Label text="Structura firelor de execuție (varianta 4)" />
-      <Label fx:id="formula" />
+      <Label fx:id="formula" wrapText="true" />
       <HBox spacing="8.0">
          <children>
             <Button fx:id="mediumButton" mnemonicParsing="false" onAction="#onMedium" text="Nivel mediu" />

@@ -28,7 +28,7 @@ public class Structure {
         add(gf, "Th2", 3);
         add(gf, "Th3", 9);
         add(main, "Th1", 3);
-        add(main, "Th2", 5);
+        add(main, "Th2", Thread.NORM_PRIORITY);
     }
 
     private void add(ThreadGroup group, String name, int priority) {

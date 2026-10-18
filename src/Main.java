@@ -1,54 +1,42 @@
 import java.util.Random;
 public class Main {
     public static void main(String[] args){
-        int[] mas = new int[100];
+        int[] mas = new int[10];
         Random randomnumber = new Random();
         for(int i = 0; i < mas.length; i++){
-            mas[i] = randomnumber.nextInt(100) + 1;
+            mas[i] = randomnumber.nextInt(10) + 1;
+        }
         Andrei th3 = new Andrei();
         Andrei th4 = new Andrei();
         th3.start();
         th4.start();
-        }
-
+        Alexandr th1 = new Alexandr(mas, 1);
+        Alexandr th2 = new Alexandr(mas, 2);
+        th1.start();
+        th2.start();
     }
 
 }
 
-class Helper{
+class Alexandr extends Thread{
+    private int[] mas;
+    int sum = 0;
 
-    public static boolean isodd(int n){
-     return n % 2 != 0;
+    Alexandr(int [] mas, int number_of_Thread){
+        this.mas = mas;
+        super("Thread" + number_of_Thread);
     }
 
-    public void printArray(int[] mas){
-        for (int i = 0; i < mas.length; i++){
-            System.out.print(mas[i] + " ");
-            System.out.println();
+    public void run(){
+        for(int i = 0; i < mas.length; i++){
+            System.out.println("Поток: " + getName() + " Текущее число: " + mas[i]);
+            sum += mas[i];
+            System.out.println("Поток: " + getName() + " Текущая СУММА: " + sum);
         }
+        System.out.println(getName() + " Сумма = " + sum);
     }
-
-
 }
 
-class Student1 extends Thread{
-    class Th1 extends Thread{
-
-    }
-
-    class Th2 extends Thread{
-
-    }
-
-
-
-
-    private int[] Alexarray;
-    public void SumOddpairsFromStart(int[] mas){
-        for (int i = 0; i < mas.length; i++) {
-        }
-    }
-}
 
 class Andrei extends Thread {
         int[] mas;

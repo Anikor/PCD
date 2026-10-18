@@ -13,16 +13,16 @@ public class Lab1 {
         System.out.println("Массив: " + Arrays.toString(mas));
 
         StartSum startSum = new StartSum(mas);
-        EndSum endSum = new EndSum(mas);
+//        EndSum endSum = new EndSum(mas);
 
         startSum.start();
-        endSum.start();
+//        endSum.start();
 
         startSum.join();
-        endSum.join();
+//        endSum.join();
 
        // System.out.println("Th1 сумма: " + startSum.getSum());
-        System.out.println("Th2 сумма: " + endSum.getSum());
+//        System.out.println("Th2 сумма: " + endSum.getSum());
 
         String info = "Лабораторная работа 1. Студенты: Гордей Сергей, Балан Александр. Группа R-241";
 

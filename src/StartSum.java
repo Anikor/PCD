@@ -1,11 +1,10 @@
-public class EndSum implements Runnable {
+public class StartSum implements Runnable {
     private final int[] mas;
     private final Thread th;
-    private int total = 0;
-
-    public EndSum(int[] mas) {
+    private long total = 0L;
+    public StartSum(int[] mas) {
         this.mas = mas;
-        this.th = new Thread(this, "Th2");
+        this.th = new Thread(this, "Th1");
     }
 
     public void start() {
@@ -24,8 +23,8 @@ public class EndSum implements Runnable {
     public void run() {
         int first = -1;
 
-        // идём с конца массива к началу
-        for (int i = mas.length - 1; i >= 0; i--) {
+        // идём с начала массива к концу
+        for (int i = 0; i < mas.length; i++) {
             if (mas[i] % 2 == 0) {
                 if (first == -1) {
                     first = i;

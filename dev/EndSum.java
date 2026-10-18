@@ -1,3 +1,4 @@
+//test 1
     import java.util.Random;
     class EndSum {
         static final int[] data = new int[20];
@@ -19,4 +20,5 @@
             }
         }
     }
+
 

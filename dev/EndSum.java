@@ -24,7 +24,6 @@ public class EndSum implements Runnable {
     public void run() {
         int first = -1;
 
-        // идём с конца массива к началу
         for (int i = mas.length - 1; i >= 0; i--) {
             if (mas[i] % 2 == 0) {
                 if (first == -1) {

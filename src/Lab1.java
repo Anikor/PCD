@@ -21,7 +21,7 @@ public class Lab1 {
         startSum.join();
         endSum.join();
 
-    //    System.out.println("Th1 сумма: " + startSum.getSum());
+        System.out.println("Th1 сумма: " + startSum.getSum());
         System.out.println("Th2 сумма: " + endSum.getSum());
 
         String info = "Лабораторная работа 1. Студенты: Гордей Сергей, Балан Александр. Группа R-241";

@@ -12,10 +12,6 @@ public class EndSum implements Runnable {
         th.start();
     }
 
-    public void join() throws InterruptedException {
-        th.join();
-    }
-
     public long getSum() {
         return total;
     }

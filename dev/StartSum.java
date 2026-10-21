@@ -11,10 +11,6 @@ public class StartSum implements Runnable {
         th.start();
     }
 
-    public void join() throws InterruptedException {
-        th.join();
-    }
-
     public long getSum() {
         return total;
     }
@@ -23,7 +19,6 @@ public class StartSum implements Runnable {
     public void run() {
         int first = -1;
 
-        // идём с начала массива к концу
         for (int i = 0; i < mas.length; i++) {
             if (mas[i] % 2 == 0) {
                 if (first == -1) {

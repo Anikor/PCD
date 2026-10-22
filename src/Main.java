@@ -88,11 +88,20 @@ class Andrei {
 
     int sumOddFromStart(String name) {
         int summa = 0;
+        int first = 0;
+        boolean hasFirst = false;
+
         for (int i = 0; i < array.length; i++) {
             System.out.println("Поток: " + name + " Текущее число: " + array[i]);
             if (array[i] % 2 != 0) {
-                summa += array[i];
-                System.out.println("Поток: " + name + " Текущая СУММА: " + summa);
+                if (!hasFirst) {
+                    first = array[i];      // запоминаем первое число пары
+                    hasFirst = true;
+                } else {
+                    summa += first + array[i];   // пара собрана, суммируем
+                    System.out.println("Поток: " + name + " Пара: " + first + " + " + array[i] + ", сумма: " + summa);
+                    hasFirst = false;      // корзина снова пуста
+                }
             }
         }
         return summa;
@@ -100,11 +109,20 @@ class Andrei {
 
     int sumOddFromEnd(String name) {
         int summa = 0;
-        for (int i = array.length - 1; i >= 0; i--) {
+        int first = 0;
+        boolean hasFirst = false;
+
+        for (int i = array.length - 1; i >= 0; i--) {   // отличие только в направлении
             System.out.println("Поток: " + name + " Текущее число: " + array[i]);
             if (array[i] % 2 != 0) {
-                summa += array[i];
-                System.out.println("Поток: " + name + " Текущая СУММА: " + summa);
+                if (!hasFirst) {
+                    first = array[i];
+                    hasFirst = true;
+                } else {
+                    summa += first + array[i];
+                    System.out.println("Поток: " + name + " Пара: " + first + " + " + array[i] + ", СУММА: " + summa);
+                    hasFirst = false;
+                }
             }
         }
         return summa;

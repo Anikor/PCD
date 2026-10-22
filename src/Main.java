@@ -6,12 +6,13 @@ public class Main {
         for(int i = 0; i < mas.length; i++){
             mas[i] = randomnumber.nextInt(10) + 1;
         }
-        Andrei th3 = new Andrei(mas,3);
-        Andrei th4 = new Andrei(mas,4);
+        Andrei s = new Andrei(mas);
+        Andrei.Th3 th3 = s.new Th3();
+        Andrei.Th4 th4 = s.new Th4();
         th3.start();
         th4.start();
         Alexandr th1 = new Alexandr(mas, 1);
-        Alexandr th2 = new Alexandr(mas, 2);
+        Alexandr2 th2 = new Alexandr2(mas, 2);
         th1.start();
         th2.start();
 
@@ -22,48 +23,118 @@ public class Main {
 
 }
 
-class Alexandr extends Thread{
-    private int[] mas;
-    int sum = 0;
+class Alexandr extends Thread
+{
+    private int[] masive;
+    int summa = 0;
 
-    Alexandr(int [] mas, int number_of_Thread){
-        this.mas = mas;
+
+
+    Alexandr(int [] mas, int number_of_Thread)
+    {
+        this.masive = mas;
         super("Thread" + number_of_Thread);
     }
 
-    public void run(){
-        for(int i = 0; i < mas.length; i++){
-            System.out.println("Поток: " + getName() + " Текущее число: " + mas[i]);
-            sum += mas[i];
-            System.out.println("Поток: " + getName() + " Текущая СУММА: " + sum);
-        }
-        System.out.println(getName() + " Сумма = " + sum);
-    }
-}
 
 
-class Andrei extends Thread {
-    int[] mas;
+    public void run()
+    {
+        for(int i = 0; i < masive.length; i++)
+        {
+            System.out.println("Поток: " + getName() + " Текущее число: " + masive[i]);
 
-    Andrei (int[] mas, int numberThreads){
-        super("Thread " + numberThreads);
-        this.mas = mas;
-    }
-
-    @Override
-    public void run() {
-        int sum = 0;
-        for (int i = mas.length - 1; i >= 0; i--) {
-            System.out.println("Поток: " + getName() + " Текущее число: " + mas[i]);
-            if (mas[i] % 2 != 0) {
-                sum += mas[i];
-                System.out.println("Поток: " + getName() + " Текущая СУММА: " + sum);
+            if (masive[i] % 2 != 0) {
+                summa += masive[i];
+                System.out.println("Поток: " + getName() + " Текущая СУММА: " + summa);
             }
         }
-        System.out.println(getName() + " Сумма = " + sum);
+        System.out.println(getName() + " Сумма = " + summa);
+    }
+}
+
+class Alexandr2 extends Thread
+{
+    private int[] masive;
+    int summa = 0;
+
+    Alexandr2(int [] mas, int number_of_Thread)
+    {
+        this.masive = mas;
+        super("Thread" + number_of_Thread);
     }
 
+    public void run()
+    {
+        for(int i = masive.length - 1; i >= 0; i--)
+        {
+            System.out.println("Поток: " + getName() + " Текущее число: " + masive[i]);
+            if (masive[i] % 2 != 0) {
+                summa += masive[i];
+                System.out.println("Поток: " + getName() + " Текущая СУММА: " + summa);
+            }
+        }
+        System.out.println(getName() + " Сумма = " + summa);
+    }
 }
+
+
+class Andrei {
+    int[] array;
+
+    Andrei(int[] array) {
+        this.array = array;
+    }
+
+    int sumOddFromStart(String name) {
+        int summa = 0;
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("Поток: " + name + " Текущее число: " + array[i]);
+            if (array[i] % 2 != 0) {
+                summa += array[i];
+                System.out.println("Поток: " + name + " Текущая СУММА: " + summa);
+            }
+        }
+        return summa;
+    }
+
+    int sumOddFromEnd(String name) {
+        int summa = 0;
+        for (int i = array.length - 1; i >= 0; i--) {
+            System.out.println("Поток: " + name + " Текущее число: " + array[i]);
+            if (array[i] % 2 != 0) {
+                summa += array[i];
+                System.out.println("Поток: " + name + " Текущая СУММА: " + summa);
+            }
+        }
+        return summa;
+    }
+
+    class Th3 extends Thread {
+        Th3() {
+            super("Thread3");
+        }
+
+        @Override
+        public void run() {
+            int result = sumOddFromStart(getName());
+            System.out.println(getName() + " Сумма = " + result);
+        }
+    }
+
+    class Th4 extends Thread {
+        Th4() {
+            super("Thread4");
+        }
+
+        @Override
+        public void run() {
+            int result = sumOddFromEnd(getName());
+            System.out.println(getName() + " Сумма = " + result);
+        }
+    }
+}
+
 class PrinterThread extends Thread {
     String text;
 

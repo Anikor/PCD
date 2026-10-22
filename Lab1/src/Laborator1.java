@@ -5,6 +5,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import java.awt.Font;
 
+// CLASA 1 - Generarea tabloului
 class Tablou {
 
     public static int[] genereaza() {
@@ -19,6 +20,7 @@ class Tablou {
 }
 
 
+// CLASA 2 - ION - foloseste Runnable
 class Ion implements Runnable {
 
     private int[] mas;
@@ -70,14 +72,14 @@ class Ion implements Runnable {
             int s4 = gasestePar(s3 + pas, pas);
             if (s4 == -1) break;
 
-            // Suma indicilor
+            // Suma indicilor, NU a valorilor
             int s11 = s1 + s2;
             int s22 = s3 + s4;
             int Stotal = s11 + s22;
 
             String linie = Thread.currentThread().getName()
-                    + ": S11=" + s1 + "+" + s2 + "=" + s11
-                    + " | S22=" + s3 + "+" + s4 + "=" + s22
+                    + ": s11=" + s1 + "+" + s2 + "=" + s11
+                    + " | s22=" + s3 + "+" + s4 + "=" + s22
                     + " | Stotal=" + s11 + "+" + s22
                     + "=" + Stotal + "\n";
 
@@ -87,7 +89,8 @@ class Ion implements Runnable {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                System.out.println("Eroare");
+                Thread.currentThread().interrupt();
+                break;
             }
 
             i = s4 + pas;
@@ -96,7 +99,7 @@ class Ion implements Runnable {
 }
 
 
-
+// CLASA 3 - MIRCEA
 class Mircea extends Thread {
 
     private int[] mas;
@@ -117,7 +120,6 @@ class Mircea extends Thread {
     @Override
     public void run() {
 
-        // Mircea foloseste un tablou de 4 indici
         int[] indici = new int[4];
 
         while (pozitie >= 0 && pozitie < mas.length) {
@@ -149,9 +151,9 @@ class Mircea extends Thread {
 
             String linie = getName()
                     + ": s11=" + indici[0] + "+"
-                    + indici[1] + "=" + s11
+                    + indici[1] + "==" + s11
                     + " | s22=" + indici[2] + "+"
-                    + indici[3] + "=" + s22
+                    + indici[3] + "==" + s22
                     + " | Stotal=" + s11 + "+" + s22
                     + "=" + Stotal + "\n";
 

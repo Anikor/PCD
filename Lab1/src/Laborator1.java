@@ -1,4 +1,4 @@
-
+// TEST GIT - modificare facuta de Ion
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;

@@ -12,23 +12,25 @@ public class Lab1 {
 
         System.out.println("Массив: " + Arrays.toString(mas));
 
-        StartSum startSum = new StartSum(mas);
-        EndSum endSum = new EndSum(mas);
+        Balka balka = new Balka(mas);
 
-        startSum.start();
-        endSum.start();
 
-        startSum.join();
-        endSum.join();
 
-        System.out.println("Th1 сумма: " + startSum.getSum());
-        System.out.println("Th2 сумма: " + endSum.getSum());
+        balka.start();
+        Sergei sergei.start();
 
-        String info = "Лабораторная работа 1. Студенты: Гордей Сергей, Балан Александр. Группа R-241";
+
+
+        System.out.println("Th1 сумма: " + balka.getSum1());
+        System.out.println("Th2 сумма: " + balka.getSum2());
+        System.out.println("Th3 сумма: " + Sergei sergei.getSum1());
+        System.out.println("Th4 сумма: " + Sergei sergei.getSum2());
+
+        String info = " Лабораторная работа 1. Студенты: Гордей Сергей, Балан Александр. Группа R-241";
 
         for (char c : info.toCharArray()) {
             System.out.print(c);
-            Thread.sleep(100);
+            Thread.sleep(100L);
         }
 
         System.out.println();

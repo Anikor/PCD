@@ -13,18 +13,11 @@ public class Lab1 {
         System.out.println("Массив: " + Arrays.toString(mas));
 
         Balka balka = new Balka(mas);
-
+        Serghei serghei = new Serghei(mas);
 
 
         balka.start();
-        Sergei sergei.start();
-
-
-
-        System.out.println("Th1 сумма: " + balka.getSum1());
-        System.out.println("Th2 сумма: " + balka.getSum2());
-        System.out.println("Th3 сумма: " + Sergei sergei.getSum1());
-        System.out.println("Th4 сумма: " + Sergei sergei.getSum2());
+        serghei.start();
 
         String info = " Лабораторная работа 1. Студенты: Гордей Сергей, Балан Александр. Группа R-241";
 

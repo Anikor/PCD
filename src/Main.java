@@ -1,20 +1,34 @@
 import java.util.Random;
 public class Main {
     public static void main(String[] args){
-        int[] mas = new int[10];
+        int[] mas = new int[100];
         Random randomnumber = new Random();
         for(int i = 0; i < mas.length; i++){
-            mas[i] = randomnumber.nextInt(10) + 1;
+            mas[i] = randomnumber.nextInt(100) + 1;
         }
+
+        Alexandr a = new Alexandr(mas);
+        Alexandr.Thread1 th1 = a.new Thread1();
+        Alexandr.Thread2 th2 = a.new Thread2();
+
         Andrei s = new Andrei(mas);
         Andrei.Th3 th3 = s.new Th3();
         Andrei.Th4 th4 = s.new Th4();
-        th3.start();
-        th4.start();
-        Alexandr th1 = new Alexandr(mas, 1);
-        Alexandr2 th2 = new Alexandr2(mas, 2);
+
         th1.start();
         th2.start();
+        th3.start();
+        th4.start();
+
+
+        try {
+            th1.join();
+            th2.join();
+            th3.join();
+            th4.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         String info = "\nЛабораторную работу выполнили:\nPileaghin Alexandr, R-241\nCirlan Andrei, R-241\n";
         PrinterThread p = new PrinterThread(info);
@@ -23,58 +37,71 @@ public class Main {
 
 }
 
-class Alexandr extends Thread
-{
-    private int[] masive;
-    int summa = 0;
+class Alexandr {
+    private int[] mas;
 
-
-
-    Alexandr(int [] mas, int number_of_Thread)
-    {
-        this.masive = mas;
-        super("Thread" + number_of_Thread);
+    Alexandr(int[] mas) {
+        this.mas = mas;
     }
 
-
-
-    public void run()
-    {
-        for(int i = 0; i < masive.length; i++)
-        {
-            System.out.println("Поток: " + getName() + " Текущее число: " + masive[i]);
-
-            if (masive[i] % 2 != 0) {
-                summa += masive[i];
-                System.out.println("Поток: " + getName() + " Текущая СУММА: " + summa);
-            }
+    class Thread1 extends Thread {
+        Thread1() {
+            super("Thread1");
         }
-        System.out.println(getName() + " Сумма = " + summa);
-    }
-}
 
-class Alexandr2 extends Thread
-{
-    private int[] masive;
-    int summa = 0;
+        @Override
+        public void run() {
+            int summa = 0;
+            int first = 0;
+            boolean hasFirst = false;
 
-    Alexandr2(int [] mas, int number_of_Thread)
-    {
-        this.masive = mas;
-        super("Thread" + number_of_Thread);
-    }
+            for (int i = 0; i < mas.length; i++) {
+                System.out.println(getName() + " текущее число: " + mas[i]);
 
-    public void run()
-    {
-        for(int i = masive.length - 1; i >= 0; i--)
-        {
-            System.out.println("Поток: " + getName() + " Текущее число: " + masive[i]);
-            if (masive[i] % 2 != 0) {
-                summa += masive[i];
-                System.out.println("Поток: " + getName() + " Текущая СУММА: " + summa);
+                if (mas[i] % 2 != 0) {
+                    if (!hasFirst) {
+                        first = mas[i];
+                        hasFirst = true;
+                    } else {
+                        summa += first + mas[i];
+                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + summa);
+                        hasFirst = false;
+                    }
+                }
             }
+            System.out.println(getName() + " Сумма = " + summa);
         }
-        System.out.println(getName() + " Сумма = " + summa);
+    }
+
+
+    class Thread2 extends Thread {
+        Thread2() {
+            super("Thread2");
+        }
+
+        @Override
+        public void run() {
+            int summa = 0;
+            int first = 0;
+            int oddCount = 0;
+            int i = mas.length - 1;
+
+            while (i >= 0) {
+                System.out.println(getName() + " текущее число: " + mas[i]);
+
+                if (mas[i] % 2 != 0) {
+                    oddCount++;
+                    if (oddCount % 2 == 1) {
+                        first = mas[i];
+                    } else {
+                        summa += first + mas[i];
+                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + summa);
+                    }
+                }
+                i--;
+            }
+            System.out.println(getName() + " Сумма = " + summa);
+        }
     }
 }
 

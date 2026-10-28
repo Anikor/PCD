@@ -28,7 +28,7 @@ public class Lab1 {
 
         for (char c : info.toCharArray()) {
             System.out.print(c);
-            Thread.sleep(100L);
+            Thread.sleep(100);
         }
 
         System.out.println();

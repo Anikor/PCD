@@ -10,10 +10,10 @@ public class SumBackward extends Thread {
                     if (first == -1) {
                         first = i;
                     } else {
+                        Thread.sleep(100);
                         Main.window.show(getName() + ": " + first + " + " + i + " = " + (first + i)
                                 + "  (" + Main.mas[first] + ", " + Main.mas[i] + ")");
                         first = -1;
-                        Thread.sleep(100);
                     }
                 }
             }

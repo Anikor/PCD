@@ -1,13 +1,15 @@
-import javax.swing.*;
-
 class EThread extends Thread {
-    public String toString() {return Thread.currentThread().getName();}
+    public String toString() {
+        return getName();
+    }
     int[] mas;
-    String res = "";
+
     public void run() {
         int n = -1;
         int sum = 0;
-        res = "Условие 1, поток " + this + " (четные позиции с начала):\n";
+
+        Main.appendToWindow("[СТАРТ] Поток " + this + " (четные позиции с начала)\n");
+
         for (int i = 0; i < 100; i++) {
             if (i % 2 == 0) {
                 if (n == -1) {
@@ -15,16 +17,17 @@ class EThread extends Thread {
                 } else {
                     int pr = n * mas[i];
                     sum = sum + pr;
-                    res = res + "Позиции: " + (i-2) + " и " + i + " -> " + n + " * " + mas[i] + " = " + pr + "\n";
+                    Main.appendToWindow("Поток " + this + " | Позиции: " + (i - 2) + " и " + i + " -> " + n + " * " + mas[i] + " = " + pr + "\n");
                     n = -1;
+                    try {
+                        Thread.sleep((long)(Math.random() * 20));
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
         }
-        res = res + "\nОбщая сумма произведений: " + sum;
 
-        JOptionPane pane = new JOptionPane(res, JOptionPane.PLAIN_MESSAGE);
-        JDialog dialog = pane.createDialog("Egor");
-        dialog.setModal(false);
-        dialog.setVisible(true);
+        Main.appendToWindow(">>> [ИТОГ] Поток " + this + " Сумма: " + sum + "\n");
     }
 }

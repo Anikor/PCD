@@ -17,10 +17,9 @@ public class SumForward extends Thread {
                     }
                 }
             }
+            Main.th4.join();
         } catch (InterruptedException e) {
             return;
-        }
-        while (Main.th4.isAlive()) {
         }
         Main.window.type(getName() + " – prenumele: Karina, Nica, Denis");
     }

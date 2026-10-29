@@ -5,7 +5,10 @@ public class Main {
         Random randomnumber = new Random();
         for(int i = 0; i < mas.length; i++){
             mas[i] = randomnumber.nextInt(100) + 1;
+            System.out.print(mas[i] + " ");
         }
+
+
 
         Alexandr a = new Alexandr(mas);
         Alexandr.Thread1 th1 = a.new Thread1();

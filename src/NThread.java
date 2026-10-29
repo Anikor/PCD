@@ -1,4 +1,7 @@
+import javax.swing.*;
+
 class NThread extends Thread {
+    public String toString() {return Thread.currentThread().getName();}
     int[] mas;
     String res = "";
     public void run() {
@@ -18,5 +21,9 @@ class NThread extends Thread {
             }
         }
         res = res + "\nSuma totala a inmultirilor: " + sum;
+        JOptionPane pane = new JOptionPane(res, JOptionPane.PLAIN_MESSAGE);
+        JDialog dialog = pane.createDialog("Nichita");
+        dialog.setModal(false);
+        dialog.setVisible(true);
     }
 }

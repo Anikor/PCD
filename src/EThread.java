@@ -1,4 +1,7 @@
+import javax.swing.*;
+
 class EThread extends Thread {
+    public String toString() {return Thread.currentThread().getName();}
     int[] mas;
     String res = "";
     public void run() {
@@ -18,5 +21,10 @@ class EThread extends Thread {
             }
         }
         res = res + "\nОбщая сумма произведений: " + sum;
+
+        JOptionPane pane = new JOptionPane(res, JOptionPane.PLAIN_MESSAGE);
+        JDialog dialog = pane.createDialog("Egor");
+        dialog.setModal(false);
+        dialog.setVisible(true);
     }
 }

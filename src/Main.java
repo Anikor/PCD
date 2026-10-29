@@ -51,7 +51,7 @@ class Alexandr {
 
         @Override
         public void run() {
-            int summa = 0;
+            int sum = 0;
             int first = 0;
             boolean hasFirst = false;
 
@@ -63,13 +63,13 @@ class Alexandr {
                         first = mas[i];
                         hasFirst = true;
                     } else {
-                        summa += first + mas[i];
-                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + summa);
+                        sum += first + mas[i];
+                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + sum);
                         hasFirst = false;
                     }
                 }
             }
-            System.out.println(getName() + " Сумма = " + summa);
+            System.out.println(getName() + " Сумма = " + sum);
         }
     }
 
@@ -81,7 +81,7 @@ class Alexandr {
 
         @Override
         public void run() {
-            int summa = 0;
+            int sum = 0;
             int first = 0;
             int oddCount = 0;
             int i = mas.length - 1;
@@ -94,13 +94,13 @@ class Alexandr {
                     if (oddCount % 2 == 1) {
                         first = mas[i];
                     } else {
-                        summa += first + mas[i];
-                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + summa);
+                        sum += first + mas[i];
+                        System.out.println(getName() + " пара: " + first + " + " + mas[i] + ", сумма: " + sum);
                     }
                 }
                 i--;
             }
-            System.out.println(getName() + " Сумма = " + summa);
+            System.out.println(getName() + " Сумма = " + sum);
         }
     }
 }

@@ -5,7 +5,7 @@ public class Main {
         Random randomnumber = new Random();
         for(int i = 0; i < mas.length; i++){
             mas[i] = randomnumber.nextInt(100) + 1;
-            System.out.println(mas[i] + " ");
+            System.out.print(mas[i] + " ");
             if(i == 50) {
                 System.out.println();
             }

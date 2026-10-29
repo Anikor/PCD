@@ -126,7 +126,6 @@ class Andrei {
         boolean hasFirst = false;
 
         for (int i = 0; i < array.length; i++) {
-            System.out.println("Поток: " + name + " Текущее число: " + array[i]);
             if (array[i] % 2 != 0) {
                 if (!hasFirst) {
                     first = array[i];      // запоминаем первое число пары
@@ -147,7 +146,6 @@ class Andrei {
         boolean hasFirst = false;
 
         for (int i = array.length - 1; i >= 0; i--) {   // отличие только в направлении
-            System.out.println("Поток: " + name + " Текущее число: " + array[i]);
             if (array[i] % 2 != 0) {
                 if (!hasFirst) {
                     first = array[i];

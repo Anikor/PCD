@@ -16,7 +16,7 @@
          </children>
       </HBox>
       <TextArea fx:id="arrayArea" prefRowCount="3" wrapText="true" />
-      <Label text="Rezultatele firelor" />
+      <Label text="Rezultatele firelor Th1, Th2, Th3, Th4" />
       <TextArea fx:id="out" editable="false" VBox.vgrow="ALWAYS" />
    </children>
    <padding>

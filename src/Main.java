@@ -9,8 +9,8 @@ public class Main {
             if(i == 50) {
                 System.out.println();
             }
-
         }
+        System.out.println();
 
 
 

@@ -63,7 +63,6 @@ class Alexandr {
             boolean hasFirst = false;
 
             for (int i = 0; i < mas.length; i++) {
-                System.out.println(getName() + " текущее число: " + mas[i]);
 
                 if (mas[i] % 2 != 0) {
                     if (!hasFirst) {
@@ -94,7 +93,6 @@ class Alexandr {
             int i = mas.length - 1;
 
             while (i >= 0) {
-                System.out.println(getName() + " текущее число: " + mas[i]);
 
                 if (mas[i] % 2 != 0) {
                     oddCount++;
@@ -126,7 +124,6 @@ class Andrei {
         boolean hasFirst = false;
 
         for (int i = 0; i < array.length; i++) {
-            System.out.println("Поток: " + name + " Текущее число: " + array[i]);
             if (array[i] % 2 != 0) {
                 if (!hasFirst) {
                     first = array[i];      // запоминаем первое число пары

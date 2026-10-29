@@ -43,6 +43,11 @@ public class Controller {
 
     public void type(String text) {
         for (char letter : text.toCharArray()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                return;
+            }
             print(String.valueOf(letter));
         }
         print("\n");

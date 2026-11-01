@@ -30,8 +30,8 @@ public class Main {
             Thread[] threads = {
                     new CounterThread("Th1 Karina", 0, last, 1, mas, window),
                     new CounterThread("Th2 Karina", last, 0, -1, mas, window),
-                    new Thread(new CounterRunnable(0, last, 1, mas, window), "Th1 Denis"),
-                    new Thread(new CounterRunnable(last, 0, -1, mas, window), "Th2 Denis")
+                    new Thread(new CounterRunnable(0, last, 1, mas, window), "Th5 Denis"),
+                    new Thread(new CounterRunnable(last, 0, -1, mas, window), "Th6 Denis")
             };
             for (Thread thread : threads) {
                 thread.start();

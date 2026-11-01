@@ -1,33 +1,45 @@
 package pcd;
 
 public class CounterRunnable implements Runnable {
-    private final int from, to, step;
-    private final int[] mas;
-    private final Controller window;
+    private final int startIndex;
+    private final int endIndex;
+    private final int step;
+    private final int[] data;
+    private final Controller controller;
 
-    public CounterRunnable(int from, int to, int step, int[] mas, Controller window) {
-        this.from = from;
-        this.to = to;
+    public CounterRunnable(int startIndex, int endIndex, int step, int[] data, Controller controller) {
+        this.startIndex = startIndex;
+        this.endIndex = endIndex;
         this.step = step;
-        this.mas = mas;
-        this.window = window;
+        this.data = data;
+        this.controller = controller;
     }
 
     @Override
     public void run() {
-        String name = Thread.currentThread().getName();
-        int first = -1;
+        String threadTag = Thread.currentThread().getName();
+        Integer firstIndex = null;
 
-        for (int i = from; i != to + step; i += step) {
-            if (mas[i] % 2 != 0) {
-                if (first == -1) {
-                    first = i;
+        for (int i = startIndex; step > 0 ? i <= endIndex : i >= endIndex; i += step) {
+            if (isOdd(data[i])) {
+                if (firstIndex == null) {
+                    firstIndex = i;
                 } else {
-                    window.show(name + ": " + first + " + " + i + " = " + (first + i)
-                            + "  (" + mas[first] + ", " + mas[i] + ")");
-                    first = -1;
+                    logPair(threadTag, firstIndex, i);
+                    firstIndex = null;
                 }
             }
         }
+    }
+
+    private boolean isOdd(int number) {
+        return number % 2 != 0;
+    }
+
+    private void logPair(String tag, int idx1, int idx2) {
+        int indexSum = idx1 + idx2;
+        String message = String.format("%s: %d + %d = %d  (%d, %d)",
+                tag, idx1, idx2, indexSum, data[idx1], data[idx2]);
+        controller.show(message);
     }
 }

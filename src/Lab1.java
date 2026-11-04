@@ -9,9 +9,16 @@ public class Lab1 {
             mas[i] = r.nextInt(100) + 1;
         }
         System.out.println("Массив: " + Arrays.toString(mas));
+        Balka balka = new Balka(mas);
 
+
+        Thread th1 = new Thread(balka, "Th1");
+        Thread th2 = new Thread(balka, "Th2");
         Serghei th3 = new Serghei(mas, true, "Th3");    // с начала
         Serghei th4 = new Serghei(mas, false, "Th4");   // с конца
+
+        th1.start();
+        th2.start();
         th3.start();
         th4.start();
 

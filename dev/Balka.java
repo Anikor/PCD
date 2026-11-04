@@ -21,13 +21,6 @@ public class Balka implements Runnable {
     }
 
 
-    private void pause() {
-        try {
-            Thread.sleep(10 + rnd.get().nextInt(91));
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
 
     private void fromStart() {
         int i = 0;
@@ -44,7 +37,7 @@ public class Balka implements Runnable {
 
             sum1 += a + b;
             System.out.println("Th1: " + a + " + " + b + " = " + (a + b));
-            pause();
+
         }
     }
 
@@ -63,7 +56,7 @@ public class Balka implements Runnable {
 
             sum2 += a + b;
             System.out.println("Th2: " + a + " + " + b + " = " + (a + b));
-            pause();
+
         }
     }
 }

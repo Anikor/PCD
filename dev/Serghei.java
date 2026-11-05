@@ -27,8 +27,8 @@ public class Serghei extends Thread {
                     first = i;
                 } else {
                     int pairSum = mas[first] + mas[i];
-                    System.out.println(name + ": " + mas[first] + " + " + mas[i]
-                            + " = " + pairSum + " (индексы " + first + ", " + i + ")");
+                    System.out.println(NAME + ": " + mas[FIRST] + " + " + mas[I]
+                            + " = " + pairSum + " (индексы " + FIRST + ", " + I + ")");
                     first = -1;
 
                 }

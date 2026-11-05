@@ -8,7 +8,7 @@ class NThread extends Thread {
         int n = -1;
         int sum = 0;
 
-        Main.appendToWindow("[СТАРТ] Thread " + this + " (citirea de la sfarsit)\n");
+        Main.appendToWindow("[START] Thread " + this + " (citirea de la sfarsit)\n");
 
         for (int i = 99; i >= 0; i--) {
             if (i % 2 == 0) {
@@ -17,7 +17,7 @@ class NThread extends Thread {
                 } else {
                     int pr = n * mas[i];
                     sum = sum + pr;
-                    Main.appendToWindow("Thread " + this + " | Pozitii: " + (i + 2) + " и " + i + " -> " + n + " * " + mas[i] + " = " + pr + "\n");
+                    Main.appendToWindow("THREAD " + this + " | POZITII: " + (i + 2) + " и " + i + " -> " + n + " * " + mas[i] + " = " + pr + "\n");
                     n = -1;
                     try {
                         Thread.sleep((long)(Math.random() * 20));
@@ -28,6 +28,6 @@ class NThread extends Thread {
             }
         }
 
-        Main.appendToWindow(">>> [ИТОГ] Thread " + this + " Suma totala: " + sum + "\n");
+        Main.appendToWindow(">>> [START] Thread " + this + " Suma totala: " + sum + "\n");
     }
 }

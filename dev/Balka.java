@@ -4,7 +4,7 @@ public class Balka implements Runnable {
     private final int[] mas;
     private int sum1 = 0;
     private int sum2 = 0;
-    private final ThreadLocal<Random> rnd = ThreadLocal.withInitial(Random::new);
+
 
     public Balka(int[] mas) {
         this.mas = mas;
@@ -15,9 +15,11 @@ public class Balka implements Runnable {
         String name = Thread.currentThread().getName();
         if (name.equals("Th1")) {
             fromStart();
-        } else {
+        } else
+        {
             fromEnd();
         }
+        System.out.println("Finish");
     }
 
 

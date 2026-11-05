@@ -30,7 +30,7 @@ public class Serghei extends Thread {
                     System.out.println(name + ": " + mas[first] + " + " + mas[i]
                             + " = " + pairSum + " (индексы " + first + ", " + i + ")");
                     first = -1;
-                    pause();
+
                 }
             }
         }
@@ -41,11 +41,5 @@ public class Serghei extends Thread {
         }
     }
 
-    private void pause() {
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
+
 }

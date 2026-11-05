@@ -26,13 +26,14 @@ public class Main {
 
         appendToWindow("Исходный массив:\n");
         StringBuilder sb = new StringBuilder();
+        int perLine = 50;
         for (int i = 0; i < mas.length; i++) {
-            sb.append(mas[i]).append("\t");
-            if (i == 49) {
+            sb.append(String.format("%3d ", mas[i]));
+            if ((i + 1) % perLine == 0 && i != mas.length - 1) {
                 sb.append("\n");
             }
         }
-        sb.append("\n\n\n\n");
+        sb.append("\n");
         appendToWindow(sb.toString());
 
         EThread e1 = new EThread();
@@ -51,7 +52,7 @@ public class Main {
         n2.start();
 
         new Thread(() -> {
-            String text = "\nIrimciuc Egor\nVidrasco Nichita\nГруппа R-241\n";
+            String text = "\n\nIrimciuc Egor\nVidrasco Nichita\nГруппа R-241\n";
             for (int i = 0; i < text.length(); i++) {
                 String ch = String.valueOf(text.charAt(i));
                 appendToWindow(ch);

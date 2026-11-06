@@ -3,7 +3,7 @@ class NThread extends Thread {
     public String toString() {
         return getName();
     }
-    int[] mas;
+    public int[] mas;
 
     public void run() {
         int n = -1;

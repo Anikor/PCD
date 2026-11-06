@@ -5,7 +5,6 @@ public class Lab2 {
         Thread.currentThread().setPriority(4);
 
         ThreadGroup main = Thread.currentThread().getThreadGroup();
-        main.list();
 
 
         Thread th1 = new Thread("th1");

@@ -51,24 +51,30 @@ public class Main {
         n1.start();
         n2.start();
 
-        new Thread(() -> {
-            String text = "\n\nIrimciuc Egor\nVidrasco Nichita\nГруппа R-241\n";
-            for (int i = 0; i < text.length(); i++) {
-                String ch = String.valueOf(text.charAt(i));
-                appendToWindow(ch);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String text = "\n\nIrimciuc Egor\nVidrasco Nichita\nГруппа R-241\n";
+                for (int i = 0; i < text.length(); i++) {
+                    String ch = String.valueOf(text.charAt(i));
+                    appendToWindow(ch);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                 }
             }
         }).start();
     }
 
-    public static void appendToWindow(String text) {
-        SwingUtilities.invokeLater(() -> {
-            textArea.append(text);
-            textArea.setCaretPosition(textArea.getDocument().getLength());
+    public static void appendToWindow(final String text) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                textArea.append(text);
+                textArea.setCaretPosition(textArea.getDocument().getLength());
+            }
         });
     }
 }

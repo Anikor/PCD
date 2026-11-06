@@ -1,4 +1,4 @@
-//This is my class (Nichita)
+//push testing
 class NThread extends Thread {
     public String toString() {
         return getName();

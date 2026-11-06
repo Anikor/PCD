@@ -1,6 +1,16 @@
 public class Ion {
 
-    // Sarcina 3: de la inceput, intervalul [120, 690]
+    static void marcheazaTerminat() {
+        Thread.currentThread().setPriority(Lab3.DONE);
+    }
+
+    static void asteaptaToateSarcinile() {
+        while (!(Lab3.t1.getPriority() == Lab3.DONE && Lab3.t2.getPriority() == Lab3.DONE
+                && Lab3.t3.getPriority() == Lab3.DONE && Lab3.t4.getPriority() == Lab3.DONE)) {
+            try { Thread.sleep(50); } catch (InterruptedException e) { }
+        }
+    }
+
     static class Th3 extends Thread {
         @Override
         public void run() {
@@ -12,20 +22,19 @@ public class Ion {
                 if (++c == 10) { System.out.println(sb); sb.setLength(0); c = 0; }
             }
             if (sb.length() > 0) System.out.println(sb);
-            Lab3.marcheazaTerminat();
-            Lab3.asteaptaToateSarcinile();
+            marcheazaTerminat();
+            asteaptaToateSarcinile();
 
-            // Th3 e ultimul: asteapta ca TOATE celelalte fire sa se termine
             try {
                 Lab3.t1.join();
                 Lab3.t2.join();
                 Lab3.t4.join();
             } catch (InterruptedException e) { }
             Lab3.afiseazaLitere("Th3 (disciplina): " + Lab3.DISCIPL);
+            System.out.println("\nToate firele s-au terminat.");
         }
     }
 
-    // Sarcina 4: de la sfarsit, intervalul [1000, 1567]
     static class Th4 extends Thread {
         @Override
         public void run() {
@@ -37,8 +46,8 @@ public class Ion {
                 if (++c == 10) { System.out.println(sb); sb.setLength(0); c = 0; }
             }
             if (sb.length() > 0) System.out.println(sb);
-            Lab3.marcheazaTerminat();
-            Lab3.asteaptaToateSarcinile();
+            marcheazaTerminat();
+            asteaptaToateSarcinile();
 
             try { Lab3.t2.join(); } catch (InterruptedException e) { }   // Th4 controleaza ca Th2 s-a terminat
             Lab3.afiseazaLitere("Th4 (grupa): " + Lab3.GRUPA);

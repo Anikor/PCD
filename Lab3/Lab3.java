@@ -20,17 +20,6 @@ public class Lab3 {
     static Thread t4 = new Ion.Th4();
 
 
-    static void marcheazaTerminat() {
-        Thread.currentThread().setPriority(DONE);
-    }
-
-    static void asteaptaToateSarcinile() {
-        while (!(t1.getPriority() == DONE && t2.getPriority() == DONE
-                && t3.getPriority() == DONE && t4.getPriority() == DONE)) {
-            try { Thread.sleep(50); } catch (InterruptedException e) { }
-        }
-    }
-
     static void afiseazaLitere(String text) {
         for (int i = 0; i < text.length(); i++) {
             try { Thread.sleep(100); } catch (InterruptedException e) { }
@@ -40,7 +29,7 @@ public class Lab3 {
     }
 
 
-    public static void main(String[] args) {
+    static void genereazaVector() {
         Random r = new Random();
         System.out.println("Vectorul:");
         for (int i = 0; i < a.length; i++) {
@@ -49,12 +38,15 @@ public class Lab3 {
             if (a[i] % 2 == 0) poz.add(i + 1);
         }
         System.out.println("\n");
+    }
 
-        t1.start(); t2.start(); t3.start(); t4.start();
 
-        try {
-            t1.join(); t2.join(); t3.join(); t4.join();
-        } catch (InterruptedException e) { e.printStackTrace(); }
-        System.out.println("\nToate firele s-au terminat.");
+    public static void main(String[] args) {
+        genereazaVector();
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
     }
 }

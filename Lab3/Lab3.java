@@ -3,45 +3,42 @@ import java.util.List;
 import java.util.Random;
 
 public class Lab3 {
-    // Datele din codul colegului
-    static final String NUME = "Beșleagă";
-    static final String PRENUME = "Mircea";
-    static final String GRUPA = "R-241";
-    static final String DISCIPL = "Programarea Concurenta si Distribuita";
+
+    static final String NUME     = "Beșleagă și Stegărescu";
+    static final String PRENUME  = "Mircea și Ion";
+    static final String GRUPA    = "R-241";
+    static final String DISCIPL  = "Programarea Concurenta si Distribuita";
 
     static final int DONE = 9;
+
     static int[] a = new int[100];
     static List<Integer> poz = new ArrayList<>();
 
-    static Mircea mircea = new Mircea();
-    static Ion ion = new Ion();
+    static Thread t1 = new Mircea.Th1();
+    static Thread t2 = new Mircea.Th2();
+    static Thread t3 = new Ion.Th3();
+    static Thread t4 = new Ion.Th4();
+
 
     static void marcheazaTerminat() {
         Thread.currentThread().setPriority(DONE);
     }
 
     static void asteaptaToateSarcinile() {
-        while (mircea.t1.getPriority() != DONE || mircea.t2.getPriority() != DONE
-                || ion.stegarescu1.getPriority() != DONE || ion.stegarescu2.getPriority() != DONE) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                return;
-            }
+        while (!(t1.getPriority() == DONE && t2.getPriority() == DONE
+                && t3.getPriority() == DONE && t4.getPriority() == DONE)) {
+            try { Thread.sleep(50); } catch (InterruptedException e) { }
         }
     }
 
     static void afiseazaLitere(String text) {
         for (int i = 0; i < text.length(); i++) {
+            try { Thread.sleep(100); } catch (InterruptedException e) { }
             System.out.print(text.charAt(i));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                return;
-            }
         }
         System.out.println();
     }
+
 
     public static void main(String[] args) {
         Random r = new Random();
@@ -49,24 +46,15 @@ public class Lab3 {
         for (int i = 0; i < a.length; i++) {
             a[i] = r.nextInt(101) + 15;
             System.out.print(a[i] + " ");
-            if (a[i] % 2 == 0) {
-                poz.add(i + 1);
-            }
+            if (a[i] % 2 == 0) poz.add(i + 1);
         }
         System.out.println("\n");
 
-        mircea.t1.start();
-        mircea.t2.start();
-        ion.stegarescu1.start();
-        ion.stegarescu2.start();
+        t1.start(); t2.start(); t3.start(); t4.start();
 
         try {
-            mircea.t1.join();
-            mircea.t2.join();
-            ion.stegarescu1.join();
-            ion.stegarescu2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+            t1.join(); t2.join(); t3.join(); t4.join();
+        } catch (InterruptedException e) { e.printStackTrace(); }
+        System.out.println("\nToate firele s-au terminat.");
     }
 }

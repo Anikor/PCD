@@ -1,4 +1,3 @@
-// CLASA MEA (membrul 1) - firele Th1 si Th2
 public class Mircea {
 
     // Sarcina 1: suma pozitiilor numerelor pare, doua cate doua, de la primul element

@@ -32,3 +32,5 @@ class NThread extends Thread {
         Main.appendToWindow(">>> [START] Thread " + this + " Suma totala: " + sum + "\n");
     }
 }
+
+// new comment

@@ -2,88 +2,42 @@ package Labs;
 
 public class Lab3 {
 
+    // Ссылки на объекты - static, чтобы любой поток мог обратиться к любому другому
+    static Andrei andrei;
+    static Th3 th3;
+    static Th4 th4;
+
     public static void main(String[] args) throws InterruptedException {
-        // Один общий объект-монитор на оба потока (как Depozit в лабе про производителей)
-        Bariera bariera = new Bariera();
+        andrei = new Andrei();
+        th3 = new Th3();
+        th4 = new Th4();
 
-            Andrei a = new Andrei();
-        Andrei.Thread1 th1 = a.new Thread1();
-        Andrei.Thread2 th2 = a.new Thread2();
-
-        Th3 th3 = new Th3(bariera); // передаём монитор потоку через конструктор
-        Th4 th4 = new Th4(bariera); // тот же самый объект, поэтому потоки "видят" друг друга
-
-        // Здесь коллега добавит запуск Th1 и Th2
-        th1.start();
-        th2.start();
-        th3.start();
+        // Порядок вывода текстов: Th2 -> Th4 -> Th1 -> Th3.
+        // Запускаем в том же порядке: к моменту, когда поток проверяет другого,
+        // тот уже запущен
+        andrei.th2.start();
         th4.start();
+        andrei.th1.start();
+        th3.start();
 
-        th1.join();
-        th2.join();
+        andrei.th1.join();
+        andrei.th2.join();
         th3.join();
         th4.join();
-//        try {
-//            th1.join();
-//            th2.join();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        while (th1.isAlive()) {
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
-    // Тексты, которые потоки выведут в конце
     static String disciplina = "Programarea Concurentă și Distribuită";
     static String grupa = "grupa - R-241";
 
-    // Метод 2: бинарная переменная (флаг)
-    // false - группа ещё не выведена, true - группа выведена
-    static volatile boolean grupaPrinted = false;
-
-    // Метод 1: монитор. Класс устроен так же, как Depozit:
-    // synchronized-метод + wait() + notifyAll()
-    // (Bariera = "барьер", asteapta = "ждёт" по-румынски)
-    static class Bariera {
-        int finished = 0; // сколько потоков уже закончили обход своего интервала
-
-        // synchronized на методе: берётся "ключ" от объекта Bariera (this).
-        // Одновременно в метод может войти только один поток
-        public synchronized void asteapta() throws InterruptedException {
-            finished = finished + 1; // отмечаемся: я закончил обход
-            notifyAll();             // будим тех, кто уже спит в wait()
-            while (finished < 2) {   // если второй поток ещё не закончил...
-                wait();              // ...отдаём ключ и засыпаем, пока не разбудят
-            }
-        }
-    }
-
-    // Th3: задача 3 - пройти интервал [0, 798] от начала
+    // Th3: обходит [0, 798] от начала, потом ждёт сигнал interrupt() от Th1
     static class Th3 extends Thread {
-        Bariera bariera; // ссылка на общий монитор
-
-        public Th3(Bariera bariera) {
-            this.bariera = bariera;
-        }
-
         public void run() {
             for (int i = 0; i <= 798; i++) {
                 System.out.println("Th3: " + i);
             }
-
+            // Метод Thread 1: interrupt() - ждём, пока Th1 нас "прервёт" (сигнал)
+            waitForInterrupt();
             try {
-                // Метод 1: ждём, пока Th4 тоже закончит обход
-                bariera.asteapta();
-                // Метод 2: ждём, пока Th4 выведет группу (флаг станет true)
-                while (grupaPrinted == false) {
-                    Thread.sleep(10);
-                }
-                // Выводим название дисциплины по буквам
                 printSlowly(disciplina);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -91,33 +45,37 @@ public class Lab3 {
         }
     }
 
-    // Th4: задача 4 - пройти интервал [1456, 2111] от конца
+    // Th4: обходит [1456, 2111] от конца, потом ждёт, пока Th2 завершится
     static class Th4 extends Thread {
-        Bariera bariera; // ссылка на общий монитор
-
-        public Th4(Bariera bariera) {
-            this.bariera = bariera;
-        }
-
         public void run() {
             for (int i = 2111; i >= 1456; i--) {
                 System.out.println("Th4: " + i);
             }
-
             try {
-                // Метод 1: ждём, пока Th3 тоже закончит обход
-                bariera.asteapta();
-                // Выводим группу по буквам
+                // Метод Thread 2: isAlive() - пока Th2 жив, ждём
+                while (andrei.th2.isAlive()) {
+                    Thread.sleep(10);
+                }
                 printSlowly(grupa);
-                // Метод 2: поднимаем флаг, Th3 может выводить своё
-                grupaPrinted = true;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    // Выводит текст по одной букве с паузой 100 мс
+    // Ждёт сигнала прерывания.
+    // Thread.interrupted() проверяет флаг и сразу его сбрасывает,
+    // иначе следующий sleep() в printSlowly() сразу бы упал
+    static void waitForInterrupt() {
+        try {
+            while (!Thread.interrupted()) {
+                Thread.sleep(10);
+            }
+        } catch (InterruptedException e) {
+            // сигнал пришёл прямо во время sleep() - это тоже сигнал
+        }
+    }
+
     static void printSlowly(String text) throws InterruptedException {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.charAt(i));
@@ -126,6 +84,10 @@ public class Lab3 {
         System.out.println();
     }
 }
+
+
+
+
 class Andrei {
 
     int[] a;        // нечётные числа
@@ -184,10 +146,13 @@ class Andrei {
                 // Метод 1: сигнал "расчёты закончены" через приоритет
                 setPriority(9);
 
-                // Метод 2: ждём, пока Th2 полностью завершится (выведет Фамилию)
-                th2.join();
+                // Метод 2: ждём, пока Th4 полностью завершится (выведет группу)
+                Lab3.th4.join();
 
                 printSlowly(prenume);
+
+                // Сигнал для Th3: теперь твоя очередь
+                Lab3.th3.interrupt();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

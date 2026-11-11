@@ -93,14 +93,13 @@ class Andrei {
     int[] a;        // нечётные числа
     int count;
 
-    String nume = "Familia";     // <-- впишите свою фамилию (выводит Th2)
-    String prenume = "Imya";     // <-- впишите своё имя (выводит Th1)
+    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr";     //выводит Th2
+    String laborator = "Laborator numarul 3";     //выводит Th1
 
     Thread1 th1 = new Thread1();
     Thread2 th2 = new Thread2();
 
     Andrei() {
-        // случайный массив, как в методичке, из него берём только нечётные
         int[] b = new int[100];
         count = 0;
         System.out.println("Исходный массив:");
@@ -127,7 +126,7 @@ class Andrei {
         System.out.println();
     }
 
-    // Th1: суммы нечётных чисел по два, с начала массива
+    // Th1: суммы нечётных чисел два по два, с начала массива
     class Thread1 extends Thread {
         public void run() {
             System.out.println("Старт потока 1");
@@ -149,7 +148,7 @@ class Andrei {
                 // Метод 2: ждём, пока Th4 полностью завершится (выведет группу)
                 Lab3.th4.join();
 
-                printSlowly(prenume);
+                printSlowly(nameofstudents );
 
                 // Сигнал для Th3: теперь твоя очередь
                 Lab3.th3.interrupt();
@@ -159,7 +158,7 @@ class Andrei {
         }
     }
 
-    // Th2: суммы нечётных чисел по два, с конца массива
+    // Th2: суммы нечётных чисел два по два, с конца массива
     class Thread2 extends Thread {
         public void run() {
             System.out.println("Старт потока 2");
@@ -180,7 +179,7 @@ class Andrei {
                     Thread.sleep(10);
                 }
 
-                printSlowly(nume);
+                printSlowly(laborator);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -6,16 +6,36 @@ public class Lab3 {
         // Один общий объект-монитор на оба потока (как Depozit в лабе про производителей)
         Bariera bariera = new Bariera();
 
+            Andrei a = new Andrei();
+        Andrei.Thread1 th1 = a.new Thread1();
+        Andrei.Thread2 th2 = a.new Thread2();
+
         Th3 th3 = new Th3(bariera); // передаём монитор потоку через конструктор
         Th4 th4 = new Th4(bariera); // тот же самый объект, поэтому потоки "видят" друг друга
 
         // Здесь коллега добавит запуск Th1 и Th2
-
+        th1.start();
+        th2.start();
         th3.start();
         th4.start();
 
+        th1.join();
+        th2.join();
         th3.join();
         th4.join();
+//        try {
+//            th1.join();
+//            th2.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        while (th1.isAlive()) {
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     // Тексты, которые потоки выведут в конце
@@ -104,5 +124,101 @@ public class Lab3 {
             Thread.sleep(100);
         }
         System.out.println();
+    }
+}
+class Andrei {
+
+    int[] a;        // нечётные числа
+    int count;
+
+    String nume = "Familia";     // <-- впишите свою фамилию (выводит Th2)
+    String prenume = "Imya";     // <-- впишите своё имя (выводит Th1)
+
+    Thread1 th1 = new Thread1();
+    Thread2 th2 = new Thread2();
+
+    Andrei() {
+        // случайный массив, как в методичке, из него берём только нечётные
+        int[] b = new int[100];
+        count = 0;
+        System.out.println("Исходный массив:");
+        for (int i = 0; i < b.length; i++) {
+            b[i] = (int) Math.round(Math.random() * 100) + 15;
+            System.out.print(b[i] + " ");
+            if (b[i] % 2 != 0) count++;
+        }
+        System.out.println();
+
+        a = new int[count];
+        int k = 0;
+        for (int x : b) {
+            if (x % 2 != 0) a[k++] = x;
+        }
+    }
+
+    // Вывод текста по буквам с паузой 100 мс
+    static void printSlowly(String text) throws InterruptedException {
+        for (int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i));
+            Thread.sleep(100);
+        }
+        System.out.println();
+    }
+
+    // Th1: суммы нечётных чисел по два, с начала массива
+    class Thread1 extends Thread {
+        public void run() {
+            System.out.println("Старт потока 1");
+            try {
+                for (int i = 0; i + 3 < count; i += 4) {
+                    int pairone = a[i] + a[i + 1];
+                    int pairtwo = a[i + 2] + a[i + 3];
+                    int result = pairone + pairtwo;
+
+                    System.out.println("Th1: (" + a[i] + " + " + a[i + 1] + ") + ("
+                            + a[i + 2] + " + " + a[i + 3] + ") = "
+                            + pairone + " + " + pairtwo + " = " + result);
+                    Thread.sleep(20);
+                }
+
+                // Метод 1: сигнал "расчёты закончены" через приоритет
+                setPriority(9);
+
+                // Метод 2: ждём, пока Th2 полностью завершится (выведет Фамилию)
+                th2.join();
+
+                printSlowly(prenume);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Th2: суммы нечётных чисел по два, с конца массива
+    class Thread2 extends Thread {
+        public void run() {
+            System.out.println("Старт потока 2");
+            try {
+                for (int i = count - 1; i - 3 >= 0; i -= 4) {
+                    int pairone = a[i] + a[i - 1];
+                    int pairtwo = a[i - 2] + a[i - 3];
+                    int result = pairone + pairtwo;
+
+                    System.out.println("Th2: (" + a[i] + " + " + a[i - 1] + ") + ("
+                            + a[i - 2] + " + " + a[i - 3] + ") = "
+                            + pairone + " + " + pairtwo + " = " + result);
+                    Thread.sleep(20);
+                }
+
+                // Метод 1: ждём сигнал от Th1 (приоритет стал 9)
+                while (th1.getPriority() != 9) {
+                    Thread.sleep(10);
+                }
+
+                printSlowly(nume);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

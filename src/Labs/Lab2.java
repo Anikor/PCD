@@ -16,7 +16,7 @@ public class Lab2 {
 
         main.list();
 
-        ThreadGroup GM = new     ThreadGroup(main, "GM");
+        ThreadGroup GM = new     ThreadGroup(main, "MG");
 
         Thread Th1 = new Thread(GM, "Th1");
         Th1.setPriority(3);

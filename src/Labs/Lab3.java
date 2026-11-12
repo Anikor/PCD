@@ -83,8 +83,8 @@ class Andrei {
     int[] a;
     int count;
 
-    String nameofstudents = " Сirlan , Pileaghin ";     //выводит Th1
-    String name = " Andrei, Alexandr ";     //выводит Th2
+    String nameofstudents = "Сirlan, Pileaghin";     //выводит Th1
+    String name = "Andrei, Alexandr";     //выводит Th2
 
     Thread1 th1 = new Thread1();
     Thread2 th2 = new Thread2();

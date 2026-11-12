@@ -89,12 +89,11 @@ public class Lab3 {
 
 
 class Andrei {
-
-    int[] a;        // нечётные числа
+    int[] a;
     int count;
 
-    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr";     //выводит Th2
-    String laborator = "Laborator numarul 3";     //выводит Th1
+    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr";     //выводит Th1
+    String laborator = "Laborator numarul 3";     //выводит Th2
 
     Thread1 th1 = new Thread1();
     Thread2 th2 = new Thread2();
@@ -117,7 +116,6 @@ class Andrei {
         }
     }
 
-    // Вывод текста по буквам с паузой 100 мс
     static void printSlowly(String text) throws InterruptedException {
         for (int i = 0; i < text.length(); i++) {
             System.out.print(text.charAt(i));
@@ -126,10 +124,8 @@ class Andrei {
         System.out.println();
     }
 
-    // Th1: суммы нечётных чисел два по два, с начала массива
     class Thread1 extends Thread {
         public void run() {
-            System.out.println("Старт потока 1");
             try {
                 for (int i = 0; i + 3 < count; i += 4) {
                     int pairone = a[i] + a[i + 1];
@@ -153,15 +149,12 @@ class Andrei {
                 // Сигнал для Th3: теперь твоя очередь
                 Lab3.th3.interrupt();
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
 
-    // Th2: суммы нечётных чисел два по два, с конца массива
     class Thread2 extends Thread {
         public void run() {
-            System.out.println("Старт потока 2");
             try {
                 for (int i = count - 1; i - 3 >= 0; i -= 4) {
                     int pairone = a[i] + a[i - 1];

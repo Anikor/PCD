@@ -135,9 +135,9 @@ class Andrei {
                 //setPriority(9);
 
                 // Метод 2: ждём, пока Th4 полностью завершится (выведет группу)
-                Lab3.th4.join();
+                 Lab3.th4.join();
 
-                printSlowly(nameofstudents );
+                printSlowly(nameofstudents);
 
                 // Сигнал для Th3: теперь твоя очередь
                 Lab3.th3.interrupt();

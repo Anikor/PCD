@@ -2,7 +2,6 @@ package Labs;
 
 public class Lab3 {
 
-    // Ссылки на объекты - static, чтобы любой поток мог обратиться к любому другому
     static Andrei andrei;
     static Th3 th3;
     static Th4 th4;
@@ -13,8 +12,6 @@ public class Lab3 {
         th4 = new Th4();
 
         // Порядок вывода текстов: Th2 -> Th4 -> Th1 -> Th3.
-        // Запускаем в том же порядке: к моменту, когда поток проверяет другого,
-        // тот уже запущен
         andrei.th2.start();
         th4.start();
         andrei.th1.start();
@@ -35,7 +32,6 @@ public class Lab3 {
             for (int i = 0; i <= 798; i++) {
                 System.out.println("Th3: " + i);
             }
-            // Метод Thread 1: interrupt() - ждём, пока Th1 нас "прервёт" (сигнал)
             waitForInterrupt();
             try {
                 printSlowly(disciplina);
@@ -45,14 +41,13 @@ public class Lab3 {
         }
     }
 
-    // Th4: обходит [1456, 2111] от конца, потом ждёт, пока Th2 завершится
     static class Th4 extends Thread {
         public void run() {
             for (int i = 2111; i >= 1456; i--) {
                 System.out.println("Th4: " + i);
             }
             try {
-                // Метод Thread 2: isAlive() - пока Th2 жив, ждём
+                // Метод Thread 2: isAlive()
                 while (andrei.th2.isAlive()) {
                     Thread.sleep(10);
                 }
@@ -63,16 +58,12 @@ public class Lab3 {
         }
     }
 
-    // Ждёт сигнала прерывания.
-    // Thread.interrupted() проверяет флаг и сразу его сбрасывает,
-    // иначе следующий sleep() в printSlowly() сразу бы упал
     static void waitForInterrupt() {
         try {
             while (!Thread.interrupted()) {
                 Thread.sleep(10);
             }
         } catch (InterruptedException e) {
-            // сигнал пришёл прямо во время sleep() - это тоже сигнал
         }
     }
 

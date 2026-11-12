@@ -165,7 +165,6 @@ class Andrei {
 
                 printSlowly(laborator);
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }

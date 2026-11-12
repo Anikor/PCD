@@ -61,7 +61,7 @@ public class Lab3 {
     static void waitForInterrupt() {
         try {
             while (!Thread.interrupted()) {
-                Thread.sleep(10);
+                th4.join();
             }
         } catch (InterruptedException e) {
         }

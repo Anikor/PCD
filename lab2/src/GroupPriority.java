@@ -5,7 +5,7 @@ public class GroupPriority {
         Runnable r = () -> {
             try { Thread.sleep(2000); } catch (InterruptedException e) { }
         };
-
+//sdasdasd
         Thread th1 = new Thread(main, r, "Th1");
         th1.setPriority(4);
         th1.start();

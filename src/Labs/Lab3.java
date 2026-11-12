@@ -23,8 +23,8 @@ public class Lab3 {
         th4.join();
     }
 
-    static String disciplina = "Programarea Concurentă și Distribuită";
-    static String grupa = "grupa - R-241";
+    static String disciplina = "Programarea Concurentă și Distribuită ";
+    static String grupa = "grupa - R-241 ";
 
     // Th3: обходит [0, 798] от начала, потом ждёт сигнал interrupt() от Th1
     static class Th3 extends Thread {
@@ -72,7 +72,6 @@ public class Lab3 {
             System.out.print(text.charAt(i));
             Thread.sleep(100);
         }
-        System.out.println();
     }
 }
 
@@ -83,8 +82,8 @@ class Andrei {
     int[] a;
     int count;
 
-    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr";     //выводит Th1
-    String laborator = "Laborator numarul 3";     //выводит Th2
+    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr ";     //выводит Th1
+    String laborator = "Laborator numarul 3 ";     //выводит Th2
 
     Thread1 th1 = new Thread1();
     Thread2 th2 = new Thread2();
@@ -112,7 +111,6 @@ class Andrei {
             System.out.print(text.charAt(i));
             Thread.sleep(100);
         }
-        System.out.println();
     }
 
     class Thread1 extends Thread {

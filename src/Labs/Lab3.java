@@ -59,12 +59,10 @@ public class Lab3 {
     }
 
     static void waitForInterrupt() {
-        try {
             while (!Thread.interrupted()) {
-                th4.join();
+                Thread.yield();
             }
-        } catch (InterruptedException e) {
-        }
+
     }
 
     static void printSlowly(String text) throws InterruptedException {

@@ -128,9 +128,11 @@ class Andrei {
                             + pairone + " + " + pairtwo + " = " + result);
                     Thread.sleep(20);
                 }
-
+                while (th2.getPriority() != 9) {
+                    Thread.sleep(10);
+                }
                 // Метод 1: сигнал "расчёты закончены" через приоритет
-                setPriority(9);
+                //setPriority(9);
 
                 // Метод 2: ждём, пока Th4 полностью завершится (выведет группу)
                 Lab3.th4.join();
@@ -159,9 +161,10 @@ class Andrei {
                 }
 
                 // Метод 1: ждём сигнал от Th1 (приоритет стал 9)
-                while (th1.getPriority() != 9) {
-                    Thread.sleep(10);
-                }
+//                while (th1.getPriority() != 9) {
+//                    Thread.sleep(10);
+//                }
+                setPriority(9);
 
                 printSlowly(name);
             } catch (InterruptedException e) {

@@ -30,7 +30,7 @@ public class Lab3 {
     static class Th3 extends Thread {
         public void run() {
             for (int i = 0; i <= 798; i++) {
-                System.out.println("Th3: " + i);
+                System.out.print("Th3: " + i + " ");
             }
             waitForInterrupt();
             try {
@@ -44,7 +44,7 @@ public class Lab3 {
     static class Th4 extends Thread {
         public void run() {
             for (int i = 2111; i >= 1456; i--) {
-                System.out.println("Th4: " + i);
+                System.out.print("Th4: " + i + " ");
             }
             try {
                 // Метод Thread 2: isAlive()

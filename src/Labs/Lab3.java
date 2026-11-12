@@ -83,8 +83,8 @@ class Andrei {
     int[] a;
     int count;
 
-    String nameofstudents = "Сirlan Andrei, Pileaghin Alexandr";     //выводит Th1
-    String laborator = "Laborator numarul 3";     //выводит Th2
+    String nameofstudents = " Сirlan , Pileaghin ";     //выводит Th1
+    String name = " Andrei, Alexandr ";     //выводит Th2
 
     Thread1 th1 = new Thread1();
     Thread2 th2 = new Thread2();
@@ -163,7 +163,7 @@ class Andrei {
                     Thread.sleep(10);
                 }
 
-                printSlowly(laborator);
+                printSlowly(name);
             } catch (InterruptedException e) {
             }
         }

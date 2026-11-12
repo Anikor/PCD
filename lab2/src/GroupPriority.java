@@ -1,4 +1,4 @@
-public class Main1 {
+public class GroupPriority {
     public static void main(String[] args) {
         ThreadGroup main = Thread.currentThread().getThreadGroup();
 

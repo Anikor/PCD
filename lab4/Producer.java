@@ -10,9 +10,9 @@ public class Producer extends Thread {
         super(name);
         this.warehouse = store;
         this.perTrip = batchSize;
-        setDaemon(true);                          // не мешает завершению программы
+        setDaemon(true);
     }
-    // Собирает одну пачку из чётных чисел
+
     private int[] makeBatch() {
         int[] batch = new int[perTrip];
         for (int i = 0; i < batch.length; i++) {
@@ -24,7 +24,7 @@ public class Producer extends Thread {
     private int nextEven() {
         return 2 * ThreadLocalRandom.current().nextInt(1, MAX_FACTOR + 1);
     }
-    // Небольшая пауза между заходами (вне монитора склада)
+
     private void rest() throws InterruptedException {
         Thread.sleep(ThreadLocalRandom.current().nextInt(MAX_PAUSE_MS));
     }
@@ -32,11 +32,11 @@ public class Producer extends Thread {
     public void run() {
         try {
             while (true) {
-                warehouse.put(getName(), makeBatch()); // ждёт сам, если склад полон
+                warehouse.put(getName(), makeBatch());
                 rest();
             }
         } catch (InterruptedException stop) {
-            // сигнал остановки от Main — просто завершаем поток
+
         }
     }
 }

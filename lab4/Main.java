@@ -1,15 +1,15 @@
 import java.util.LinkedList;
 
-// Общий Main: параметры варианта 1, склад (Store) и запуск потоков. Вывод — в терминал.
+
 public class Main {
-    // ===== Параметры варианта 1 =====
+
     static final int X = 2;   // производителей
     static final int Y = 3;   // потребителей
     static final int Z = 11;  // сколько объектов должен получить каждый потребитель
     static final int D = 8;   // размер склада
     static final int F = 2;   // объектов за раз у производителя
 
-    // ===== Склад (общий ресурс). Вся синхронизация потоков живёт здесь =====
+
     static class Store {
         private final LinkedList<Integer> items = new LinkedList<>();
 

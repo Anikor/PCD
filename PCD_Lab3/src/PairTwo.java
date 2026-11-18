@@ -16,16 +16,15 @@ public class PairTwo
                     for (int i = 100; i <= 500; i++)
                     {
                         System.out.print(" Th3: " + i);
-                        try
-                        {
-                            Thread.sleep(Long.MAX_VALUE);
-                        }
-                        catch (InterruptedException e) {}
-                        Main.printText("Th3 Disciplina: " + discipline);
+                        Thread.sleep(10);
                     }
 
-                    pairOne.getTh2().join();
-                    Main.printText("Th4 Grupa: " + group);
+                    try
+                    {
+                        Thread.sleep(Long.MAX_VALUE);
+                    }
+                    catch (InterruptedException e) {}
+                    Main.printText("Th3 Disciplina: " + discipline);
 
                 }
                 catch (InterruptedException e)

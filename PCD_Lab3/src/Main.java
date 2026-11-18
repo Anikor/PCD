@@ -5,12 +5,14 @@ public class Main {
     static final String DISCIPLINE = "PCD";
 
     public static void main(String[] args) {
+        PairOne pairOne = new PairOne(LAST_NAME, FIRST_NAME);
         PairTwo pairTwo = new PairTwo(GROUP, DISCIPLINE);
-        pairTwo.start();
-        PairOne pairOne = new PairOne(LAST_NAME, FIRST_NAME, pairTwo.getLastThread());
 
+        pairOne.setPairTwo(pairTwo);
+        pairTwo.setPairOne(pairOne);
 
         pairOne.start();
+        pairTwo.start();
     }
 
     static void printText(String info) throws InterruptedException {

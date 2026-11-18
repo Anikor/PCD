@@ -1,6 +1,6 @@
 public class Main {
     static final String LAST_NAME  = "Gordei Balan";
-    static final String FIRST_NAME = "Serhgei Alecsandr";
+    static final String FIRST_NAME = "Serghei Alecsandr";
     static final String GROUP      = "R-241";
     static final String DISCIPLINE = "PCD";
 

@@ -10,14 +10,20 @@ public class Store {
     }
 
     public synchronized void put(String name, int a, int b) {
-        while (stockList.size() + 2 > capacity) {
+        while (stockList.size() >= capacity) {
             System.out.println("Склад полон. " + name + " ждёт");
             try {
                 wait();
             } catch (InterruptedException e) { }
         }
-        stockList.add(a);
-        stockList.add(b);
+        if  (stockList.size() + 1 == capacity) {
+            stockList.add(a);
+        }
+        else {
+            stockList.add(a);
+            stockList.add(b);
+        }
+
         System.out.println(name + " поместил на склад два числа: " + a + ", " + b);
         printState();
         notifyAll();

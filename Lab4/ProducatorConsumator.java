@@ -1,4 +1,3 @@
-
 public class ProducatorConsumator {
     public static void main(String[] args) throws InterruptedException {
         Depozit d1 = new Depozit();

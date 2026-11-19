@@ -1,11 +1,9 @@
 import java.util.ArrayList;
-
 public class Depozit {
     ArrayList<Integer> cabinet = new ArrayList<>();
     int D = 5;
     int fireTerminate = 0;
     boolean finalizat = false;
-
     public synchronized void Scriere(int a, int b) throws InterruptedException {
         while (cabinet.size() + 2 > D) {
             System.out.println(Thread.currentThread().getName() +

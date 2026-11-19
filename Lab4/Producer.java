@@ -1,7 +1,6 @@
 public class Producer extends Thread {
     Depozit depozit;
     int perechi;
-
     public Producer(int perechi, Depozit depozit) {
         this.perechi = perechi;
         this.depozit = depozit;

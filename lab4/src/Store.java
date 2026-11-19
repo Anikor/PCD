@@ -30,7 +30,7 @@ public class Store {
                 wait();
             } catch (InterruptedException e) { }
         }
-        int value = stockList.remove(stockList.size() - 1);
+        int value = stockList.removeLast();
         System.out.println(name + " взял со склада: " + value);
         printState();
         notifyAll();

@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static final int X = 2;
-    static final int Y = 5;
-    static final int Z = 3;
-    static final int D = 12;
+    static final int X = 2; // Producer
+    static final int Y = 5; // Consumer
+    static final int Z = 3; // Objects
+    static final int D = 12; // Store
 
     public static void main(String[] args) throws InterruptedException {
         Store store = new Store(D);

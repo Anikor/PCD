@@ -11,12 +11,40 @@ import java.util.Deque;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
+import javax.swing.*;
+import java.awt.*;
 
 public class Lab6 {
     static final int X = 4;   // producatori
     static final int Y = 3;   // consumatori
     static final int Z = 50;  // total obiecte
     static final int D = 10;  // capacitatea depozitului
+    static final int PAUZA = 400; // мс, чтобы в окне было видно работу
+
+    // ===== INTERFATA =====
+    static JTextArea jurnal;
+
+    static void creeazaFereastra() {
+        JFrame f = new JFrame("Lab6 - Producator / Consumator");
+
+        jurnal = new JTextArea();
+        jurnal.setEditable(false);
+        jurnal.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+
+        f.add(new JScrollPane(jurnal));
+        f.setSize(650, 500);
+        f.setLocationRelativeTo(null);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+    }
+
+    // Вызывается из любых потоков; окно меняется только в потоке Swing
+    static void log(String mesaj) {
+        SwingUtilities.invokeLater(() -> {
+            jurnal.append(mesaj + "\n");
+            jurnal.setCaretPosition(jurnal.getDocument().getLength());
+        });
+    }
 
     // Общий склад
     static class Depozit {
@@ -45,13 +73,13 @@ public class Lab6 {
                     if (d.plin) {
                         char c = d.stoc.removeFirst();
                         totalConsumat++;
-                        System.out.println(getName() + " a consumat " + c
+                        log(getName() + " a consumat " + c
                                 + " | stoc=" + d.stoc.size() + "/" + D
                                 + " | total=" + totalConsumat);
 
                         if (d.stoc.isEmpty()) {
-                            d.plin = false; // склад пуст - ход производителям
-                            System.out.println("<<< Depozitul e gol\n");
+                            d.plin = false;
+                            log("<<< Depozitul e gol\n");
                         }
                     }
                 } finally {
@@ -59,7 +87,7 @@ public class Lab6 {
                 }
 
                 try {
-                    Thread.sleep((int) (Math.random() * 100));
+                    Thread.sleep((int) (Math.random() * PAUZA));
                 } catch (InterruptedException e) {
                     return;
                 }
@@ -89,12 +117,12 @@ public class Lab6 {
             for (int i = 0; i < X && dep.stoc.size() < D; i++) {
                 dep.stoc.addLast(obiect[i]);
                 totalProdus++;
-                System.out.println("Producator-" + (i + 1) + " a produs " + obiect[i]
+                log("Producator-" + (i + 1) + " a produs " + obiect[i]
                         + " | stoc=" + dep.stoc.size() + "/" + D + " | total=" + totalProdus);
             }
             if (dep.stoc.size() == D) {
                 dep.plin = true; // ход потребителям
-                System.out.println(">>> Depozitul e plin\n");
+                log(">>> Depozitul e plin\n");
             }
         }
 
@@ -104,7 +132,7 @@ public class Lab6 {
                 while (totalProdus < Z) {
                     obiect[id] = (char) ('A' + (int) (Math.random() * 26)); // F = 1 объект
                     bariera.await();
-                    Thread.sleep((int) (Math.random() * 100));
+                    Thread.sleep((int) (Math.random() * PAUZA));
                 }
             } catch (InterruptedException e) {
                 return;
@@ -114,7 +142,9 @@ public class Lab6 {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
+        SwingUtilities.invokeAndWait(Lab6::creeazaFereastra);
+
         Depozit d = new Depozit();
 
         Producator[] producatori = new Producator[X];
@@ -129,8 +159,10 @@ public class Lab6 {
             consumatori[i].start();
         }
 
-        for (Consumator c : consumatori) c.join();
-        System.out.println("Gata: consumate " + Consumator.totalConsumat
+        for (int i = 0; i < Y; i++) {
+            consumatori[i].join();
+        }
+        log("Gata: consumate " + Consumator.totalConsumat
                 + ", in depozit au ramas " + d.stoc.size());
     }
 }

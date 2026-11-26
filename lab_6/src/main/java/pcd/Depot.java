@@ -61,8 +61,8 @@ public class Depot {
             if (stock.isEmpty()) {
                 filling = true;
                 Main.window.showConsumer("Depozitul e gol – producătorii pot produce");
-                canProduce.signal();
-                canConsume.signal();
+                canProduce.signalAll();
+                canConsume.signalAll();
             }
             return true;
         } finally {

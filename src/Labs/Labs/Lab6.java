@@ -15,11 +15,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Lab6 {
-    static final int X = 4;   // producatori
-    static final int Y = 3;   // consumatori
-    static final int Z = 50;  // total obiecte
-    static final int D = 10;  // capacitatea depozitului
-    static final int PAUZA = 400; // мс, чтобы в окне было видно работу
+    static final int X = 4;
+    static final int Y = 3;
+    static final int Z = 50;
+    static final int D = 10;
+    static final int PAUZA = 400;
 
     // ===== INTERFATA =====
     static JTextArea jurnal;
@@ -38,7 +38,6 @@ public class Lab6 {
         f.setVisible(true);
     }
 
-    // Вызывается из любых потоков; окно меняется только в потоке Swing
     static void log(String mesaj) {
         SwingUtilities.invokeLater(() -> {
             jurnal.append(mesaj + "\n");
@@ -46,11 +45,10 @@ public class Lab6 {
         });
     }
 
-    // Общий склад
     static class Depozit {
         Deque<Character> stoc = new ArrayDeque<>();
         ReentrantLock lacat = new ReentrantLock();
-        boolean plin = false; // true - склад заполнен, потребители могут забирать
+        boolean plin = false;
     }
 
     // ===== CONSUMATOR =====
@@ -79,7 +77,7 @@ public class Lab6 {
 
                         if (d.stoc.isEmpty()) {
                             d.plin = false;
-                            log("<<< Depozitul e gol\n");
+                            log("  Depozitul e gol\n");
                         }
                     }
                 } finally {
@@ -123,7 +121,7 @@ public class Lab6 {
             }
             if (dep.stoc.size() == D) {
                 dep.plin = true; // ход потребителям
-                log(">>> Depozitul e plin\n");
+                log("   Depozitul e plin\n");
             }
         }
 

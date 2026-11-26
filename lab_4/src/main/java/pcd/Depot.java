@@ -42,7 +42,7 @@ public class Depot {
         if (stock.isEmpty()) {
             Main.window.showConsumer("Depozitul e gol");
         }
-        notify();
+        notifyAll();
         return c;
     }
 

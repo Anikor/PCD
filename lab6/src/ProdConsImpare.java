@@ -10,7 +10,7 @@ public class ProdConsImpare {
     static final int PRODUCERS = 2;
     static final int CONSUMERS = 5;
 
-    static class sklad {
+    static class Sklad {
         final Deque<Integer> buffer = new ArrayDeque<>(CAPACITY);
         final ReentrantLock lock = new ReentrantLock(true);
         final Random rnd = new Random();
@@ -67,10 +67,10 @@ public class ProdConsImpare {
     }
 
     static class Producer extends Thread {
-        private final sklad sklad;
+        private final Sklad sklad;
         private final Phaser phaser;
 
-        Producer(sklad sklad, Phaser phaser, String name) {
+        Producer(Sklad sklad, Phaser phaser, String name) {
             super(name);
             this.sklad = sklad;
             this.phaser = phaser;
@@ -103,10 +103,10 @@ public class ProdConsImpare {
     }
 
     static class Consumer extends Thread {
-        private final sklad sklad;
+        private final Sklad sklad;
         private final Phaser phaser;
 
-        Consumer(sklad sklad, Phaser phaser, String name) {
+        Consumer(Sklad sklad, Phaser phaser, String name) {
             super(name);
             this.sklad = sklad;
             this.phaser = phaser;
@@ -139,7 +139,7 @@ public class ProdConsImpare {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        sklad sklad = new sklad();
+        Sklad sklad = new Sklad();
         Phaser phaser = new Phaser(PRODUCERS + CONSUMERS);
         Thread[] producers = new Thread[PRODUCERS];
         Thread[] consumers = new Thread[CONSUMERS];

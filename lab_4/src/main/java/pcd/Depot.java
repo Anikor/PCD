@@ -10,8 +10,10 @@ public class Depot {
     public synchronized void put(String who, char a, char b) throws InterruptedException {
         char[] pair = {a, b};
         for (char c : pair) {
-            while (stock.size() == SIZE && !done) {
+            if (stock.size() == SIZE) {
                 Main.window.showProducer(who + " așteaptă: depozitul e plin");
+            }
+            while (stock.size() == SIZE && !done) {
                 wait();
             }
             if (done) {

@@ -27,6 +27,23 @@ public class Depot {
         }
     }
 
+    public synchronized char get(String who) throws InterruptedException {
+        if (stock.isEmpty()) {
+            Main.window.showConsumer(who + " așteaptă: depozitul e gol");
+        }
+        while (stock.isEmpty()) {
+            wait();
+        }
+        char c = stock.remove(stock.size() - 1);
+        Main.window.showConsumer(who + " a luat " + c);
+        Main.window.showDepot("Depozit " + stock.size() + "/" + SIZE + ": " + stock);
+        if (stock.isEmpty()) {
+            Main.window.showConsumer("Depozitul e gol");
+        }
+        notify();
+        return c;
+    }
+
     public synchronized void finish() {
         done = true;
         notifyAll();

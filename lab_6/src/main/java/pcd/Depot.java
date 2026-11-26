@@ -34,7 +34,7 @@ public class Depot {
             if (stock.size() == SIZE) {
                 filling = false;
                 Main.window.showProducer("Depozitul e plin – consumatorii pot lua");
-                canConsume.signal();
+                canConsume.signalAll();
             }
             return true;
         } finally {

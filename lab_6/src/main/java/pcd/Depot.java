@@ -41,4 +41,32 @@ public class Depot {
             lock.unlock();
         }
     }
+
+    public boolean get(String who) throws InterruptedException {
+        lock.lock();
+        try {
+            if (filling && consumed < TOTAL) {
+                Main.window.showConsumer(who + " așteaptă: depozitul se umple (" + stock.size() + "/" + SIZE + ")");
+            }
+            while (filling && consumed < TOTAL) {
+                canConsume.await();
+            }
+            if (consumed == TOTAL) {
+                return false;
+            }
+            char c = stock.remove(stock.size() - 1);
+            consumed++;
+            Main.window.showConsumer(who + " a consumat " + c + "   (" + consumed + "/" + TOTAL + ")");
+            Main.window.showDepot("Depozit " + stock.size() + "/" + SIZE + ": " + stock);
+            if (stock.isEmpty()) {
+                filling = true;
+                Main.window.showConsumer("Depozitul e gol – producătorii pot produce");
+                canProduce.signal();
+                canConsume.signal();
+            }
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
 }

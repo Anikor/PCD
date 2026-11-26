@@ -2,12 +2,18 @@ package pcd;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Depot {
     static final int SIZE = 11;
+    static final int TOTAL = Main.CONSUMERS * Consumer.NEEDED;
     private final BlockingQueue<Character> queue = new ArrayBlockingQueue<Character>(SIZE);
+    private final AtomicInteger produced = new AtomicInteger(0);
 
-    public void put(String who, char a, char b) throws InterruptedException {
+    public boolean put(String who, char a, char b) throws InterruptedException {
+        if (produced.getAndAdd(2) >= TOTAL) {
+            return false;
+        }
         if (queue.remainingCapacity() < 2) {
             Main.window.showProducer(who + " așteaptă: depozitul e plin");
         }
@@ -18,6 +24,7 @@ public class Depot {
         if (queue.remainingCapacity() == 0) {
             Main.window.showProducer("Depozitul e plin");
         }
+        return true;
     }
 
     public char take(String who) throws InterruptedException {

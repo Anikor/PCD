@@ -31,10 +31,7 @@ public class Depot {
         if (queue.isEmpty()) {
             Main.window.showConsumer(who + " așteaptă: depozitul e gol");
         }
-        Character c = queue.poll();
-        while (c == null) {
-            c = queue.poll();
-        }
+        char c = queue.take();
         Main.window.showConsumer(who + " a luat " + c + "   (" + Thread.currentThread().getName() + ")");
         Main.window.showDepot("Depozit " + queue.size() + "/" + SIZE + ": " + queue);
         if (queue.isEmpty()) {

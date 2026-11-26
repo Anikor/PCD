@@ -35,7 +35,7 @@ public class ProdConsPare {
             try {
                 if (producedTotal >= TARGET_TOTAL) return false;
                 if (buffer.size() == CAPACITY) return false;
-                int value = (rnd.nextInt(45) + 1) * 2;
+                int value = (rnd.nextInt(45) + 1) * 2;  // intervalul 2 - 90
                 buffer.addLast(value);
                 producedTotal++;
                 System.out.printf("%s a produs %d | stoc=%d/%d | totalProd=%d%n",

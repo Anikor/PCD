@@ -10,7 +10,7 @@ public class ProdConsImpare {
     static final int PRODUCERS = 2;
     static final int CONSUMERS = 5;
 
-    static class Depot {
+    static class sklad {
         final Deque<Integer> buffer = new ArrayDeque<>(CAPACITY);
         final ReentrantLock lock = new ReentrantLock(true);
         final Random rnd = new Random();
@@ -67,24 +67,24 @@ public class ProdConsImpare {
     }
 
     static class Producer extends Thread {
-        private final Depot depot;
+        private final sklad sklad;
         private final Phaser phaser;
 
-        Producer(Depot depot, Phaser phaser, String name) {
+        Producer(sklad sklad, Phaser phaser, String name) {
             super(name);
-            this.depot = depot;
+            this.sklad = sklad;
             this.phaser = phaser;
         }
 
         @Override
         public void run() {
             try {
-                while (!depot.done) {
+                while (!sklad.done) {
                     int phase = phaser.getPhase();
                     if (phase % 2 == 0) {
                         boolean madeSomething = true;
-                        while (!depot.done) {
-                            madeSomething = depot.tryProduce(getName());
+                        while (!sklad.done) {
+                            madeSomething = sklad.tryProduce(getName());
                             if (!madeSomething) break;
                         }
                         phaser.arriveAndAwaitAdvance();
@@ -103,24 +103,24 @@ public class ProdConsImpare {
     }
 
     static class Consumer extends Thread {
-        private final Depot depot;
+        private final sklad sklad;
         private final Phaser phaser;
 
-        Consumer(Depot depot, Phaser phaser, String name) {
+        Consumer(sklad sklad, Phaser phaser, String name) {
             super(name);
-            this.depot = depot;
+            this.sklad = sklad;
             this.phaser = phaser;
         }
 
         @Override
         public void run() {
             try {
-                while (!depot.done) {
+                while (!sklad.done) {
                     int phase = phaser.getPhase();
                     if (phase % 2 == 1) {
                         boolean tookSomething = true;
-                        while (!depot.done) {
-                            tookSomething = depot.tryConsume(getName());
+                        while (!sklad.done) {
+                            tookSomething = sklad.tryConsume(getName());
                             if (!tookSomething) break;
                         }
                         phaser.arriveAndAwaitAdvance();
@@ -139,16 +139,16 @@ public class ProdConsImpare {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Depot depot = new Depot();
+        sklad sklad = new sklad();
         Phaser phaser = new Phaser(PRODUCERS + CONSUMERS);
         Thread[] producers = new Thread[PRODUCERS];
         Thread[] consumers = new Thread[CONSUMERS];
 
         for (int i = 0; i < PRODUCERS; i++) {
-            producers[i] = new Producer(depot, phaser, "Producator-" + (i + 1));
+            producers[i] = new Producer(sklad, phaser, "Producator-" + (i + 1));
         }
         for (int i = 0; i < CONSUMERS; i++) {
-            consumers[i] = new Consumer(depot, phaser, "Consumator-" + (i + 1));
+            consumers[i] = new Consumer(sklad, phaser, "Consumator-" + (i + 1));
         }
 
         for (Thread t : producers) t.start();

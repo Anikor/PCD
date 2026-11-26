@@ -21,12 +21,12 @@
          <children>
             <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Producători" HBox.hgrow="ALWAYS">
                <content>
-                  <TextArea fx:id="producerArea" editable="false" />
+                  <TextArea fx:id="producerArea" editable="false" wrapText="true" />
                </content>
             </TitledPane>
             <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" text="Consumatori" HBox.hgrow="ALWAYS">
                <content>
-                  <TextArea fx:id="consumerArea" editable="false" />
+                  <TextArea fx:id="consumerArea" editable="false" wrapText="true" />
                </content>
             </TitledPane>
          </children>

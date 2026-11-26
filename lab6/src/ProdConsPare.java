@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ProdConsImpare {
+public class ProdConsPare {
     static final int CAPACITY = 12;
     static final int TARGET_TOTAL = 60;
     static final int PRODUCERS = 2;

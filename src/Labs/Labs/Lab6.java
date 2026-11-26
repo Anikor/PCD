@@ -98,6 +98,7 @@ public class Lab6 {
     // ===== PRODUCATOR =====
     static class Producator extends Thread {
         static int totalProdus = 0;
+        static final char[] VOCALE= {'A', 'I', 'O', 'E', 'U'};
         static final char[] obiect = new char[X]; // объект каждого производителя
         static final CyclicBarrier bariera = new CyclicBarrier(X, Producator::depune);
         static Depozit dep;
@@ -130,7 +131,7 @@ public class Lab6 {
         public void run() {
             try {
                 while (totalProdus < Z) {
-                    obiect[id] = (char) ('A' + (int) (Math.random() * 26)); // F = 1 объект
+                    obiect[id] = VOCALE[(int) (Math.random() * VOCALE.length)]; // F = 1 гласная
                     bariera.await();
                     Thread.sleep((int) (Math.random() * PAUZA));
                 }

@@ -19,4 +19,20 @@ public class Depot {
             Main.window.showProducer("Depozitul e plin");
         }
     }
+
+    public char take(String who) throws InterruptedException {
+        if (queue.isEmpty()) {
+            Main.window.showConsumer(who + " așteaptă: depozitul e gol");
+        }
+        Character c = queue.poll();
+        while (c == null) {
+            c = queue.poll();
+        }
+        Main.window.showConsumer(who + " a luat " + c + "   (" + Thread.currentThread().getName() + ")");
+        Main.window.showDepot("Depozit " + queue.size() + "/" + SIZE + ": " + queue);
+        if (queue.isEmpty()) {
+            Main.window.showConsumer("Depozitul e gol");
+        }
+        return c;
+    }
 }
